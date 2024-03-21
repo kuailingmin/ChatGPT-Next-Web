@@ -12,18 +12,15 @@ import { getClientConfig } from "../config/client";
 
 export function AuthPage() {
   const navigate = useNavigate();
-  const access = useAccessStore();
+  const accessStore = useAccessStore();
 
   const goHome = () => navigate(Path.Home);
-  const goChat = () => {
-    console.log(access.accessCode);
-    if (access.accessCode === "123456") {
-      navigate(Path.Chat);
-    }
-  };
+  const goChat = () => navigate(Path.Chat);
   const resetAccessCode = () => {
-    access.updateCode("");
-    access.updateToken("");
+    accessStore.update((access) => {
+      access.openaiApiKey = "";
+      access.accessCode = "";
+    });
   }; // Reset access code to empty string
 
   useEffect(() => {
@@ -46,11 +43,29 @@ export function AuthPage() {
         className={styles["auth-input"]}
         type="password"
         placeholder={Locale.Auth.Input}
-        value={access.accessCode}
+        value={accessStore.accessCode}
         onChange={(e) => {
-          access.updateCode(e.currentTarget.value);
+          accessStore.update(
+            (access) => (access.accessCode = e.currentTarget.value),
+          );
         }}
       />
+      {!accessStore.hideUserApiKey ? (
+        <>
+          <div className={styles["auth-tips"]}>{Locale.Auth.SubTips}</div>
+          <input
+            className={styles["auth-input"]}
+            type="password"
+            placeholder={Locale.Settings.Access.OpenAI.ApiKey.Placeholder}
+            value={accessStore.openaiApiKey}
+            onChange={(e) => {
+              accessStore.update(
+                (access) => (access.openaiApiKey = e.currentTarget.value),
+              );
+            }}
+          />
+        </>
+      ) : null}
 
       <div className={styles["auth-actions"]}>
         <IconButton

@@ -8,8 +8,8 @@
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "StarsGPT Web",
-    "version": "2.9.8"
+    "productName": "ChatGPT Next Web",
+    "version": "2.9.11"
   },
   "tauri": {
     "allowlist": {
