@@ -685,18 +685,19 @@ function _Chat() {
   };
 
   const doSubmit = (userInput: string) => {
+    console.log("submit", userInput);
     if (userInput.trim() === "") return;
-    const matchCommand = chatCommands.match(userInput);
-    if (matchCommand.matched) {
-      setUserInput("");
-      setPromptHints([]);
-      matchCommand.invoke();
-      return;
-    }
+    // const matchCommand = chatCommands.match(userInput);
+    // if (matchCommand.matched) {
+    //   setUserInput("");
+    //   setPromptHints([]);
+    //   matchCommand.invoke();
+    //   return;
+    // }
     setIsLoading(true);
     chatStore.onUserInput(userInput).then(() => setIsLoading(false));
     localStorage.setItem(LAST_INPUT_KEY, userInput);
-    setUserInput("");
+    // setUserInput("11111");
     setPromptHints([]);
     if (!isMobileScreen) inputRef.current?.focus();
     setAutoScroll(true);

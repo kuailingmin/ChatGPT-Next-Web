@@ -53,6 +53,7 @@ async function handle(
   }
 
   try {
+    console.log("req", req);
     const response = await requestOpenai(req);
 
     // list models

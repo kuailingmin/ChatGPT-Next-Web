@@ -114,7 +114,7 @@ export function ChatList(props: { narrow?: boolean }) {
     ) {
       return;
     }
-
+    console.log(source.index);
     moveSession(source.index, destination.index);
   };
 

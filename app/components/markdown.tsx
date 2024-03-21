@@ -141,6 +141,7 @@ export function Markdown(
   } & React.DOMAttributes<HTMLDivElement>,
 ) {
   const mdRef = useRef<HTMLDivElement>(null);
+  console.log("props", props);
 
   return (
     <div
